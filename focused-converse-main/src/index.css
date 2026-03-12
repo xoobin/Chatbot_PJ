@@ -1,0 +1,115 @@
+@import url('https://cdn.jsdelivr.net/npm/geist@1.2.2/dist/fonts/geist-sans/variable/geist-sans.css');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 17% 98%;
+    --foreground: 202 23% 23%;
+
+    --card: 210 17% 98%;
+    --card-foreground: 202 23% 23%;
+
+    --popover: 210 17% 98%;
+    --popover-foreground: 202 23% 23%;
+
+    --primary: 202 23% 40%;
+    --primary-foreground: 210 17% 98%;
+
+    --secondary: 201 22% 72%;
+    --secondary-foreground: 202 23% 23%;
+
+    --muted: 210 17% 90%;
+    --muted-foreground: 202 23% 45%;
+
+    --accent: 182 17% 60%;
+    --accent-foreground: 210 17% 98%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 210 10% 85%;
+    --input: 210 10% 85%;
+    --ring: 182 17% 60%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    font-family: 'Geist Sans', 'GeistSans', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .chat-bubble {
+    @apply px-5 py-3 max-w-[75%];
+    border-radius: 1.25rem;
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+
+  .chat-bubble-user {
+    @apply bg-primary text-primary-foreground self-end;
+  }
+
+  .chat-bubble-ai {
+    @apply bg-secondary text-secondary-foreground self-start;
+  }
+
+  .chat-bubble-ai pre {
+    @apply bg-foreground/10 rounded-lg p-3 overflow-x-auto my-2;
+  }
+
+  .chat-bubble-ai code {
+    @apply text-sm;
+  }
+
+  .chat-bubble-ai p + p {
+    @apply mt-2;
+  }
+
+  .chat-bubble-ai ul, .chat-bubble-ai ol {
+    @apply pl-5 my-2;
+  }
+
+  .chat-bubble-ai ul {
+    @apply list-disc;
+  }
+
+  .chat-bubble-ai ol {
+    @apply list-decimal;
+  }
+
+  .thinking-dots span {
+    @apply inline-block w-2 h-2 rounded-full bg-muted-foreground/50;
+    animation: pulse-dot 1.4s infinite ease-in-out both;
+  }
+
+  .thinking-dots span:nth-child(1) { animation-delay: 0s; }
+  .thinking-dots span:nth-child(2) { animation-delay: 0.2s; }
+  .thinking-dots span:nth-child(3) { animation-delay: 0.4s; }
+}
+
+@keyframes pulse-dot {
+  0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+  40% { opacity: 1; transform: scale(1); }
+}
