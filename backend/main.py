@@ -4,6 +4,7 @@ from backend.router.chat_router import router
 from openai import OpenAI
 import os
 
+
 app = FastAPI()
 
 # 프론트 연결 허용 (CORS)
