@@ -3,6 +3,7 @@ import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ChatMessage from "@/components/ChatMessage";
 import ThinkingBubble from "@/components/ThinkingBubble";
+import { sendMessage } from "../api/chat";
 
 interface Message {
   role: "user" | "assistant";
@@ -20,37 +21,31 @@ const Index = () => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [messages, isLoading]);
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    const trimmed = input.trim();
-    if (!trimmed || isLoading) return;
+  //바꾼 부분
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
 
-    const userMessage: Message = { role: "user", content: trimmed };
-    setMessages((prev) => [...prev, userMessage]);
-    setInput("");
-    setIsLoading(true);
+  if (!input.trim()) return;
 
-    if (textareaRef.current) {
-      textareaRef.current.style.height = "auto";
-    }
+  const userMessage = input;
 
-    try {
-      const res = await fetch("/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: trimmed }),
-      });
-      const data = await res.json();
-      setMessages((prev) => [...prev, { role: "assistant", content: data.response }]);
-    } catch {
-      setMessages((prev) => [
-        ...prev,
-        { role: "assistant", content: "Sorry, something went wrong. Please try again." },
-      ]);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  setInput("");
+  setIsLoading(true);
+
+  try {
+    const reply = await sendMessage(userMessage);
+
+    setMessages([
+  ...messages,
+  { role: "user", content: userMessage },
+  { role: "assistant", content: reply }
+]);
+  } catch (error) {
+    console.error("API error:", error);
+  }
+
+  setIsLoading(false);
+};
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && !e.shiftKey) {
