@@ -1,5 +1,6 @@
 from openai import OpenAI
 import os
+print("KEY:", os.getenv("OPENAI_API_KEY"))
 
 def generate_response(messages):
 
