@@ -34,6 +34,7 @@ const handleSubmit = async (e: React.FormEvent) => {
 
   try {
     const reply = await sendMessage(userMessage);
+    console.log("REPLY:", reply);
 
     setMessages(prev => [
       ...prev,
