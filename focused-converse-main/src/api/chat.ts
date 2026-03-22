@@ -7,12 +7,12 @@ export async function sendMessage(message: string) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-    user_id: "user1",
-    message
-})
+      user_id: "user1",
+      message
+    })
   });
 
   const data = await res.json();
 
-  return data.response;
+  return data.reply; // 👈 여기 중요
 }
