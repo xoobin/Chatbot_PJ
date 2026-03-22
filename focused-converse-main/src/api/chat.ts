@@ -14,5 +14,5 @@ export async function sendMessage(message: string) {
 
   const data = await res.json();
 
-  return data.reply; // 👈 여기 중요
+  return data.response; // 👈 여기 중요
 }
