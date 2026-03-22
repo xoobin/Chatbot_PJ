@@ -35,17 +35,11 @@ const handleSubmit = async (e: React.FormEvent) => {
   try {
     const reply = await sendMessage(userMessage);
 
-    setMessages([
-  ...messages,
+   setMessages(prev => [
+  ...prev,
   { role: "user", content: userMessage },
   { role: "assistant", content: reply }
 ]);
-  } catch (error) {
-    console.error("API error:", error);
-  }
-
-  setIsLoading(false);
-};
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && !e.shiftKey) {
