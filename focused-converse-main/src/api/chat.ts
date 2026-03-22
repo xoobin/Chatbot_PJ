@@ -1,7 +1,7 @@
 //API 통신만 담당하는 곳
 export async function sendMessage(message: string) {
 
-  const res = await fetch("https://chatbot-pj.onrender.com/chat", {
+  const res = await fetch("https://chatbot-pj-2026.onrender.com/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
